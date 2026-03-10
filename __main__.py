@@ -38,8 +38,10 @@ while running:
     #emergency exit
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
-        print("[emergency exit successfull]")
+        print("[emergency exit initiated]")
         break
+
+
 
 print(player.tail)
 
