@@ -30,10 +30,6 @@ while running:
         player.pos_update()
         pos_update_time = time.time()
 
-
-    #print(f"dir_x: {player.dir_x}, dir_y: {player.dir_y}")
-    #print(f"x: {player.x} y: {player.y}")
-
     #screan render
     screen.fill((255, 255, 255))
     player.draw(screen)
@@ -45,6 +41,7 @@ while running:
         print("[emergency exit successfull]")
         break
 
+print(player.tail)
 
 pygame.quit()
 sys.exit("[exit successfull]")
