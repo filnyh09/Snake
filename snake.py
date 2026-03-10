@@ -10,7 +10,7 @@ class snake:
         self.dir_x = int(0)
         self.dir_y = int(0)
         self.tail = []
-        self.tail_length = int(3)
+        self.tail_length = int(0)
     
     def draw(self, screen):
         for segment in self.tail:

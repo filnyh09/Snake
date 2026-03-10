@@ -12,10 +12,12 @@ player = snake(400, 300)
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.event.get()
+pygame.display.set_caption("Snake Game")
+
 
 #seting veriables
 pos_update_time = time.time()
-
+aple_pos = [100, 100]
 
 #main loop
 running = True
@@ -40,7 +42,6 @@ while running:
     if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
         print("[emergency exit initiated]")
         break
-
 
 
 print(player.tail)
