@@ -16,14 +16,13 @@ pygame.display.set_caption("Snake Game")
 
 #seting veriables
 pos_update_time = time.time()
-aple_pos = [50 * randint(1, 15), 50 * randint(1, 11)]
 
 #apple setup
 apple = pygame.sprite.Sprite()
 apple.image = pygame.image.load("apple.png").convert_alpha()
 apple.rect = apple.image.get_rect()
 apple.image = pygame.transform.scale(apple.image, (50, 50))
-apple.rect.topleft = aple_pos
+apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
 
 
 #main loop
@@ -38,6 +37,12 @@ while running:
     if time.time() - pos_update_time > 0.5:
         player.pos_update()
         pos_update_time = time.time()
+
+    #test
+    if player.x == apple.rect.x and player.y == apple.rect.y:
+        player.tail_length += 1
+        apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+
 
     #screan render
     screen.fill((255, 255, 255))
