@@ -11,11 +11,17 @@ class snake:
         self.dir_y = int(0)
         self.tail = []
         self.tail_length = int(0)
+        super().__init__()
+        self.og_image = pygame.image.load("snake_smile.png").convert_alpha()
+        self.image = pygame.Surface((self.size, self.size))
+        self.image = self.og_image.subsurface((0, 0, self.size, self.size))
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        
     
     def draw(self, screen):
         for segment in self.tail:
-            pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(segment[0], segment[1], self.size, self.size))
-        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(self.x, self.y, self.size, self.size))
+            pygame.draw.rect(screen, (38, 159, 32), pygame.Rect(segment[0], segment[1], self.size, self.size))
+        screen.blit(self.image, (self.x, self.y))
     
     def control(self, event):
         if event.type == pygame.KEYDOWN:
@@ -44,3 +50,22 @@ class snake:
         self.dir = self.dir_controll
         self.x += self.dir_x * self.size
         self.y += self.dir_y * self.size
+
+        self.rotation_angle = int()
+        if self.dir == "up":
+            self.rotation_angle = 180
+        elif self.dir == "down":
+            self.rotation_angle = 0
+        elif self.dir == "left":
+            self.rotation_angle = -90
+        elif self.dir == "right":
+            self.rotation_angle = 90
+        else:
+            print("[error] invalid direction")
+        
+
+
+        self.image = pygame.transform.rotate(self.og_image, self.rotation_angle)
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        
+        

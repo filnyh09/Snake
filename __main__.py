@@ -4,15 +4,15 @@ import pygame
 import time
 from random import randint
 
-#snake class import
-from snake import snake
-player = snake(400, 300)
-
 #initilise game
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.event.get()
 pygame.display.set_caption("Snake Game")
+
+#snake class import
+from snake import snake
+player = snake(400, 300)
 
 #seting veriables
 pos_update_time = time.time()
@@ -49,12 +49,6 @@ while running:
             
         player.pos_update()
         pos_update_time = time.time()
-
-    #collision detection with apple
-#    if player.x == apple.rect.x and player.y == apple.rect.y:
-#        player.tail_length += 1
-#        apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
-
 
     #screan render
     screen.fill((255, 255, 255))
