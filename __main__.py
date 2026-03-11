@@ -35,13 +35,19 @@ while running:
         player.control(event)
 
     if time.time() - pos_update_time > 0.5:
+        
+        #collision detection with apple
+        if player.x + player.dir_x * 50 == apple.rect.x and player.y + player.dir_y * 50 == apple.rect.y:
+            player.tail_length += 1
+            apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+            
         player.pos_update()
         pos_update_time = time.time()
 
-    #test
-    if player.x == apple.rect.x and player.y == apple.rect.y:
-        player.tail_length += 1
-        apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+    #collision detection with apple
+#    if player.x == apple.rect.x and player.y == apple.rect.y:
+#        player.tail_length += 1
+#        apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
 
 
     #screan render
@@ -55,6 +61,7 @@ while running:
     if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
         print("[emergency exit initiated]")
         break
+        print("[emergency exit failed]")
 
 
 print(player.tail)
