@@ -22,7 +22,13 @@ apple = pygame.sprite.Sprite()
 apple.image = pygame.image.load("apple.png").convert_alpha()
 apple.rect = apple.image.get_rect()
 apple.image = pygame.transform.scale(apple.image, (50, 50))
-apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+
+def apple_spawn():
+    apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+    while apple.rect.topleft in player.tail or (apple.rect.x == player.x and apple.rect.y == player.y):
+        apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+
+apple_spawn()
 
 
 #main loop
@@ -39,7 +45,7 @@ while running:
         #collision detection with apple
         if player.x + player.dir_x * 50 == apple.rect.x and player.y + player.dir_y * 50 == apple.rect.y:
             player.tail_length += 1
-            apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
+            apple_spawn()
             
         player.pos_update()
         pos_update_time = time.time()
