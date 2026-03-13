@@ -31,6 +31,18 @@ def apple_spawn():
 apple_spawn()
 
 
+#endgame condition function
+def check_collision():
+    #collision with self
+    if (player.x, player.y) in player.tail:
+        print("[collision with self detected]")
+        return True
+    elif player.x < 0 or player.x > 750 or player.y < 0 or player.y > 550:
+        print("[collision with wall detected]")
+        return True
+    return False
+
+
 #main loop
 running = True
 while running:
@@ -51,7 +63,7 @@ while running:
         pos_update_time = time.time()
 
     #screan render
-    screen.fill((255, 255, 255))
+    screen.fill((94, 143, 67))
     screen.blit(apple.image, apple.rect)
     player.draw(screen)
     pygame.display.update()
@@ -62,6 +74,15 @@ while running:
         print("[emergency exit initiated]")
         break
         print("[emergency exit failed]")
+    
+    #endgame condition check
+    if check_collision():
+        if player.tail_length < 164:
+            print("[lost]")
+            break
+        else:
+            print("[won]")
+
 
 
 print(player.tail)

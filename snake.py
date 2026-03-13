@@ -20,7 +20,7 @@ class snake:
     
     def draw(self, screen):
         for segment in self.tail:
-            pygame.draw.rect(screen, (38, 159, 32), pygame.Rect(segment[0], segment[1], self.size, self.size))
+            pygame.draw.rect(screen, ((86, 184, 154)), pygame.Rect(segment[0], segment[1], self.size, self.size))
         screen.blit(self.image, (self.x, self.y))
     
     def control(self, event):
