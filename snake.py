@@ -1,5 +1,27 @@
 import pygame
 
+
+class button:
+    def __init__(self, x, y, width, hight, text, action = None):
+        self.rect = pygame.Rect(x, y, width, hight)
+        self.action = action
+        self.text = text
+        self.color = (200, 200, 200)
+        self.hover_color = (150, 150, 150)
+        self.font = pygame.font.SysFont(None, 36)
+    def draw(self, screen):
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            pygame.draw.rect(screen, self.hover_color, self.rect)
+        else:
+            pygame.draw.rect(screen, self.color, self.rect)
+        text_surface = self.font.render(self.text, True, "black")
+        screen.blit(text_surface, (self.rect.x + 10, self.rect.y + 10))
+        pygame.display.update()
+    def is_clicked(self):
+        if self.rect.collidepoint(pygame.mouse.get_pos()) and  pygame.mouse.get_pressed()[0]:
+            return True
+        return False
+
 class snake:
     def __init__(self, x, y):
         self.x = int(x)
@@ -62,10 +84,6 @@ class snake:
             self.rotation_angle = 90
         else:
             print("[error] invalid direction")
-        
-
 
         self.image = pygame.transform.rotate(self.og_image, self.rotation_angle)
         self.image = pygame.transform.scale(self.image, (self.size, self.size))
-        
-        

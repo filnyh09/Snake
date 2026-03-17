@@ -11,11 +11,18 @@ pygame.event.get()
 pygame.display.set_caption("Snake Game")
 
 #snake class import
-from snake import snake
-player = snake(400, 300)
+import snake
+player = snake.snake(400, 300)
 
 #seting veriables
 pos_update_time = time.time()
+
+#emergency exit
+def emergency_exit_check():
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
+        print("[emergency exit initiated]")
+        return True
 
 #apple setup
 apple = pygame.sprite.Sprite()
@@ -42,6 +49,16 @@ def check_collision():
         return True
     return False
 
+def endgame_screen(winn: bool):
+    quit = snake.button(300, 250, 200, 100, "Quit")
+    while True:
+        quit.draw(screen)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or quit.is_clicked() or emergency_exit_check():
+                pygame.quit()
+                sys.exit("[exit successfull]")
+
+
 
 #main loop
 running = True
@@ -67,21 +84,17 @@ while running:
     screen.blit(apple.image, apple.rect)
     player.draw(screen)
     pygame.display.update()
-
-    #emergency exit
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
-        print("[emergency exit initiated]")
-        break
-        print("[emergency exit failed]")
     
+    emergency_exit_check()
+
     #endgame condition check
     if check_collision():
         if player.tail_length < 164:
             print("[lost]")
-            break
+            endgame_screen(False)
         else:
             print("[won]")
+
 
 
 
