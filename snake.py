@@ -85,8 +85,6 @@ class snake:
             self.rotation_angle = -90
         elif self.dir == "right":
             self.rotation_angle = 90
-        else:
-            print("[error] invalid direction")
 
         self.image = pygame.transform.rotate(self.og_image, self.rotation_angle)
         self.image = pygame.transform.scale(self.image, (self.size, self.size))

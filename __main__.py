@@ -19,10 +19,13 @@ pos_update_time = time.time()
 
 #emergency exit
 def emergency_exit_check():
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
-        print("[emergency exit initiated]")
-        return True
+    try:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL]:
+            print("[emergency exit initiated]")
+            return True
+    except:
+        print("[errer] emergency exit check failed")
 
 #apple setup
 apple = pygame.sprite.Sprite()
@@ -66,13 +69,12 @@ def endgame_screen(win: bool):
         if restart.is_clicked():
             player.restart()
             player.draw(screen)
+            apple_spawn(0, 0)
             end_screen = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT or quit.is_clicked() or emergency_exit_check():
-                pygame.quit()
-                sys.exit("[exit successfull]")
-
-
+                    pygame.quit()
+                    sys.exit("[exit successfull]")
 
 #main loop
 running = True
@@ -102,7 +104,9 @@ while running:
     player.draw(screen)
     pygame.display.update()
     
-    emergency_exit_check()
+    if emergency_exit_check():
+        pygame.quit()
+        sys.exit("[exit successfull]")
 
     #endgame condition check
     if check_collision():
