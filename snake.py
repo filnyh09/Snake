@@ -50,19 +50,19 @@ class snake:
     
     def control(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and self.dir != "right":
+            if event.key == pygame.K_LEFT and self.dir != "right" or event.key == pygame.K_a and self.dir != "right":
                 self.dir_controll = "left"
                 self.dir_x = -1
                 self.dir_y = 0
-            elif event.key == pygame.K_RIGHT and self.dir != "left":
+            elif event.key == pygame.K_RIGHT and self.dir != "left" or event.key == pygame.K_d and self.dir != "left":
                 self.dir_controll = "right"
                 self.dir_x = 1
                 self.dir_y = 0
-            elif event.key == pygame.K_UP and self.dir != "down":
+            elif event.key == pygame.K_UP and self.dir != "down" or event.key == pygame.K_w and self.dir != "down":
                 self.dir_controll = "up"
                 self.dir_x = 0
                 self.dir_y = -1
-            elif event.key == pygame.K_DOWN and self.dir != "up":
+            elif event.key == pygame.K_DOWN and self.dir != "up" or event.key == pygame.K_s and self.dir != "up":
                 self.dir_controll = "down"
                 self.dir_x = 0
                 self.dir_y = 1
