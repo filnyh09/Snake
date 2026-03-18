@@ -30,12 +30,12 @@ apple.image = pygame.image.load("apple.png").convert_alpha()
 apple.rect = apple.image.get_rect()
 apple.image = pygame.transform.scale(apple.image, (50, 50))
 
-def apple_spawn():
+def apple_spawn(forward_x, forward_y):
     apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
-    while apple.rect.topleft in player.tail or (apple.rect.x == player.x and apple.rect.y == player.y):
+    while apple.rect.topleft in player.tail or (apple.rect.x == player.x + forward_x and apple.rect.y == player.y + forward_y):
         apple.rect.topleft = [50 * randint(1, 15), 50 * randint(1, 11)]
 
-apple_spawn()
+apple_spawn(0, 0)
 
 
 #endgame condition function
@@ -88,7 +88,7 @@ while running:
         #collision detection with apple
         if player.x + player.dir_x * 50 == apple.rect.x and player.y + player.dir_y * 50 == apple.rect.y:
             player.tail_length += 1
-            apple_spawn()
+            apple_spawn(player.dir_x * 50, player.dir_y)
             player.load_image("snake_eat.png")
         else:
             player.load_image("snake_smile.png")
