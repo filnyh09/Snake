@@ -50,16 +50,23 @@ def check_collision():
     return False
 
 def endgame_screen(win: bool):
-    quit = snake.button(300, 250, 200, 100, "Quit")
+    quit = snake.button(150, 250, 200, 100, "Quit")
+    restart = snake.button(450, 250, 200, 100, "Restart")
     endgame_screen = pygame.font.SysFont('Comic Sans MS', 30)
     if win:
         endgame_message = endgame_screen.render("you win", False, (0, 0, 0))
     else:
         endgame_message = endgame_screen.render("you loose", False, (0, 0, 0))
     
-    while True:
+    end_screen = True
+    while end_screen:
         screen.blit(endgame_message, (330, 100))
         quit.draw(screen)
+        restart.draw(screen)
+        if restart.is_clicked():
+            player.restart()
+            player.draw(screen)
+            end_screen = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT or quit.is_clicked() or emergency_exit_check():
                 pygame.quit()

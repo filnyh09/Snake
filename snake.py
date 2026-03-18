@@ -87,3 +87,13 @@ class snake:
 
         self.image = pygame.transform.rotate(self.og_image, self.rotation_angle)
         self.image = pygame.transform.scale(self.image, (self.size, self.size))
+    
+    def restart(self):
+        self.x = int(400)
+        self.y = int(300)
+        self.dir = str()
+        self.dir_controll = str()
+        self.dir_x = int(0)
+        self.dir_y = int(0)
+        self.tail = []
+        self.tail_length = int(0)
