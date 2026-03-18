@@ -23,6 +23,13 @@ class button:
         return False
 
 class snake:
+
+    def load_image(self, image = str):
+        self.og_image = pygame.image.load(image).convert_alpha()
+        self.image = pygame.Surface((self.size, self.size))
+        self.image = self.og_image.subsurface((0, 0, self.size, self.size))
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+
     def __init__(self, x, y):
         self.x = int(x)
         self.y = int(y)
@@ -34,12 +41,8 @@ class snake:
         self.tail = []
         self.tail_length = int(0)
         super().__init__()
-        self.og_image = pygame.image.load("snake_smile.png").convert_alpha()
-        self.image = pygame.Surface((self.size, self.size))
-        self.image = self.og_image.subsurface((0, 0, self.size, self.size))
-        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        self.load_image("snake_smile.png")
         
-    
     def draw(self, screen):
         for segment in self.tail:
             pygame.draw.rect(screen, ((86, 184, 154)), pygame.Rect(segment[0], segment[1], self.size, self.size))
@@ -47,19 +50,19 @@ class snake:
     
     def control(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and self.dir != "right":
+            if event.key == pygame.K_LEFT and self.dir != "right" or event.key == pygame.K_a and self.dir != "right":
                 self.dir_controll = "left"
                 self.dir_x = -1
                 self.dir_y = 0
-            elif event.key == pygame.K_RIGHT and self.dir != "left":
+            elif event.key == pygame.K_RIGHT and self.dir != "left" or event.key == pygame.K_d and self.dir != "left":
                 self.dir_controll = "right"
                 self.dir_x = 1
                 self.dir_y = 0
-            elif event.key == pygame.K_UP and self.dir != "down":
+            elif event.key == pygame.K_UP and self.dir != "down" or event.key == pygame.K_w and self.dir != "down":
                 self.dir_controll = "up"
                 self.dir_x = 0
                 self.dir_y = -1
-            elif event.key == pygame.K_DOWN and self.dir != "up":
+            elif event.key == pygame.K_DOWN and self.dir != "up" or event.key == pygame.K_s and self.dir != "up":
                 self.dir_controll = "down"
                 self.dir_x = 0
                 self.dir_y = 1
@@ -82,8 +85,16 @@ class snake:
             self.rotation_angle = -90
         elif self.dir == "right":
             self.rotation_angle = 90
-        else:
-            print("[error] invalid direction")
 
         self.image = pygame.transform.rotate(self.og_image, self.rotation_angle)
         self.image = pygame.transform.scale(self.image, (self.size, self.size))
+    
+    def restart(self):
+        self.x = int(400)
+        self.y = int(300)
+        self.dir = str()
+        self.dir_controll = str()
+        self.dir_x = int(0)
+        self.dir_y = int(0)
+        self.tail = []
+        self.tail_length = int(0)
