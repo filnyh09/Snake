@@ -89,6 +89,9 @@ while running:
         if player.x + player.dir_x * 50 == apple.rect.x and player.y + player.dir_y * 50 == apple.rect.y:
             player.tail_length += 1
             apple_spawn()
+            player.load_image("snake_eat.png")
+        else:
+            player.load_image("snake_smile.png")
             
         player.pos_update()
         pos_update_time = time.time()

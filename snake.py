@@ -23,6 +23,13 @@ class button:
         return False
 
 class snake:
+
+    def load_image(self, image = str):
+        self.og_image = pygame.image.load(image).convert_alpha()
+        self.image = pygame.Surface((self.size, self.size))
+        self.image = self.og_image.subsurface((0, 0, self.size, self.size))
+        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+
     def __init__(self, x, y):
         self.x = int(x)
         self.y = int(y)
@@ -34,12 +41,8 @@ class snake:
         self.tail = []
         self.tail_length = int(0)
         super().__init__()
-        self.og_image = pygame.image.load("snake_smile.png").convert_alpha()
-        self.image = pygame.Surface((self.size, self.size))
-        self.image = self.og_image.subsurface((0, 0, self.size, self.size))
-        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        self.load_image("snake_smile.png")
         
-    
     def draw(self, screen):
         for segment in self.tail:
             pygame.draw.rect(screen, ((86, 184, 154)), pygame.Rect(segment[0], segment[1], self.size, self.size))
