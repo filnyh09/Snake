@@ -101,6 +101,7 @@ while running:
             endgame_screen(False)
         else:
             print("[won]")
+            endgame_screen(True)
 
 
 
